@@ -1,0 +1,34 @@
+
+class Solution {
+    // Function to rotate an array by d elements in counter-clockwise direction.
+    static void rotateArr(int arr[], int d) {
+        int n=arr.length;
+        d= d%n;
+        
+        int cycles = gcd(n,d);
+        
+        for(int i=0;i<cycles;i++){
+            int left = arr[i];
+            int leftIdx = i, nextIdx;
+            
+            while(true){
+                nextIdx = (leftIdx + d) % n;
+                if(nextIdx == i)
+                    break;
+                arr[leftIdx] = arr[nextIdx];
+                leftIdx = nextIdx;
+            }
+            arr[leftIdx] = left;
+        }
+    }
+    
+    static int gcd(int n,int d)
+    {
+        while(d!=0){
+            int temp = d;
+            d =n % d;
+            n=temp;
+        }
+        return n;
+    }
+}
